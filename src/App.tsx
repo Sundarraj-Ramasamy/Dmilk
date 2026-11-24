@@ -4,7 +4,7 @@ import {
   ClipboardList, CreditCard, Download, LogOut, Milk, Plus, Search,
   Send, ShieldCheck, Store, Truck, Wallet, X,
 } from 'lucide-react'
-import { api, DEMO_EMAIL, DEMO_PASSWORD } from './lib/api'
+import { api } from './lib/api'
 import { currency, displayDate, number, todayString } from './lib/format'
 import {
   defaultRates, products, zeroQuantities,
@@ -43,8 +43,8 @@ function billFor(quantities: Quantities, rates: Rates) {
 }
 
 function Login({ onLogin }: { onLogin: (email: string, password: string) => Promise<void> }) {
-  const [email, setEmail] = useState(DEMO_EMAIL)
-  const [password, setPassword] = useState(DEMO_PASSWORD)
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
   const [error, setError] = useState('')
   const [busy, setBusy] = useState(false)
 
@@ -67,15 +67,15 @@ function Login({ onLogin }: { onLogin: (email: string, password: string) => Prom
         <div className="brand-mark"><Milk size={25} strokeWidth={2.2} /></div>
         <p className="eyebrow">MILKROUTE • DISTRIBUTION</p>
         <h1>Your daily route, in control.</h1>
-        <p className="login-copy">Demo sign-in for this browser. Shop data stays on this device.</p>
+        <p className="login-copy">Sign in with the administrator account configured for your MilkRoute server.</p>
         <form className="login-form" onSubmit={submit}>
           <label>Email address<input type="email" autoComplete="username" value={email} onChange={(event) => setEmail(event.target.value)} placeholder="admin@example.com" required /></label>
           <label>Password<input type="password" autoComplete="current-password" value={password} onChange={(event) => setPassword(event.target.value)} placeholder="Enter your password" required /></label>
           {error && <p className="form-error" role="alert">{error}</p>}
           <Button type="submit" disabled={busy}>{busy ? 'Signing in…' : 'Sign in'}<ChevronRight size={17} /></Button>
         </form>
-        <div className="login-safe"><ShieldCheck size={15} /> Demo only — this sign-in is not secure authentication.</div>
-        <div className="demo-credentials">Demo credentials are prefilled. Data is saved only in this browser.</div>
+        <div className="login-safe"><ShieldCheck size={15} /> Secure administrator sign-in</div>
+        <div className="demo-credentials">Delivery records and shop details are stored in the connected MongoDB database.</div>
       </div>
       <div className="login-side-note">A little more clarity<br />on every delivery.</div>
     </main>
